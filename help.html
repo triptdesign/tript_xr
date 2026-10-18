@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRIPT XR — Help & Controls</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/help.css">
+</head>
+<body class="help-page">
+  <header class="topbar help-topbar">
+    <div class="brand"><div class="brand-mark">T</div><div><div class="brand-name">TRIPT XR</div><div class="brand-subtitle">Help, controls & procedures</div></div></div>
+    <div class="top-actions"><a class="help-link" href="./index.html">Open Main Viewer</a><a class="help-link" href="./editor.html">Open Developer Studio</a></div>
+  </header>
+  <main class="help-main">
+    <section class="help-hero">
+      <p class="help-eyebrow">QUICK REFERENCE</p>
+      <h1>Navigate, inspect and edit your building</h1>
+      <p>TRIPT XR adapts its navigation input to your device. Desktop keyboard and mouse controls and touch controls use the same camera movement behavior. Walk Mode remains a separate first-person experience.</p>
+    </section>
+
+    <nav class="help-jump" aria-label="Help sections">
+      <a href="#main-viewer">Main Viewer</a><a href="#developer-studio">Developer Studio</a><a href="#walk-mode">Walk Mode</a><a href="#procedures">Procedures</a><a href="#troubleshooting">Troubleshooting</a>
+    </nav>
+
+    <section id="main-viewer" class="help-card">
+      <h2>1. Main Viewer — Orbit / Explore</h2>
+      <p>Use this mode to inspect the building from outside and move the camera around the model.</p>
+      <div class="table-scroll"><table><thead><tr><th>Action</th><th>Desktop</th><th>Tablet / Mobile</th></tr></thead><tbody>
+        <tr><td>Move forward / backward / left / right</td><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></td><td>Move the on-screen joystick</td></tr>
+        <tr><td>Move faster</td><td>Hold <kbd>Shift</kbd></td><td>Tap <strong>FAST</strong> to toggle faster movement</td></tr>
+        <tr><td>Orbit / rotate view</td><td>Left mouse drag</td><td>One-finger drag on the model</td></tr>
+        <tr><td>Pan view</td><td>Right mouse drag</td><td>Two-finger drag</td></tr>
+        <tr><td>Zoom</td><td>Mouse wheel</td><td>Pinch with two fingers</td></tr>
+        <tr><td>Reset camera</td><td colspan="2">Use <strong>Reset view</strong> in the top toolbar</td></tr>
+        <tr><td>Open help</td><td colspan="2">Use <strong>Help &amp; controls</strong> in the top toolbar</td></tr>
+      </tbody></table></div>
+      <p class="help-note"><strong>Touch note:</strong> Two-finger gestures are handled by Three.js OrbitControls and can combine panning and dolly/zoom depending on the gesture. The on-screen joystick is for camera translation, not for entering Walk Mode.</p>
+    </section>
+
+    <section id="developer-studio" class="help-card">
+      <h2>2. Developer Studio — Camera and editing</h2>
+      <p>The editor uses free-fly navigation. On desktop, right-drag looks around; on touch devices, enable Navigation to reveal the joystick and dedicated look area. Turn Navigation off before tapping the model to edit it.</p>
+      <div class="table-scroll"><table><thead><tr><th>Action</th><th>Desktop</th><th>Tablet / Mobile</th></tr></thead><tbody>
+        <tr><td>Move horizontally</td><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></td><td>Enable Navigation, then use joystick</td></tr>
+        <tr><td>Move vertically</td><td><kbd>E</kbd> up · <kbd>Q</kbd> down</td><td>Enable Navigation, then hold UP or DOWN</td></tr>
+        <tr><td>Move faster</td><td>Hold <kbd>Shift</kbd></td><td>Enable Navigation, then tap <strong>FAST</strong></td></tr>
+        <tr><td>Look around</td><td>Right mouse button + drag</td><td>Enable Navigation, then drag the right-side look area</td></tr>
+        <tr><td>Move forward / backward</td><td>Scroll wheel over the 3D viewport</td><td>Enable Navigation, then tap ZOOM + or ZOOM −</td></tr>
+        <tr><td>Return from touch navigation</td><td>Not needed for mouse controls</td><td>Tap <strong>Exit touch navigation</strong></td></tr>
+        <tr><td>Cancel / release controls</td><td><kbd>Esc</kbd> clears held keys and ends camera look</td><td>Use the navigation toggle to exit navigation</td></tr>
+      </tbody></table></div>
+      <h3>Material picking</h3>
+      <ol><li>Open the <strong>Render</strong> tab and find the Material section.</li><li>Activate the <strong>Pick Material</strong> button.</li><li>On touch devices, make sure touch Navigation is off.</li><li>Click or tap a surface in the model. If the material can be mapped to the material catalog, its controls load in the editor.</li><li>Adjust the available properties and use the existing Apply control to preview the override.</li></ol>
+      <h3>Place a 360° viewpoint</h3>
+      <ol><li>Open the <strong>360° Viewpoint</strong> tab.</li><li>Activate <strong>Place viewpoint</strong>.</li><li>On touch devices, make sure touch Navigation is off.</li><li>Click or tap a valid surface in the model. The placement tool uses surface checks, so walls or unsuitable faces may be rejected.</li><li>Complete the viewpoint details and save using the available panel controls.</li></ol>
+      <p class="help-note"><strong>Editing safety:</strong> The same viewport tap must not both rotate the camera and pick a material or place a viewpoint. In touch Navigation mode, model taps are reserved for navigation; exit it before editing.</p>
+    </section>
+
+    <section id="walk-mode" class="help-card">
+      <h2>3. Walk Mode — First-person exploration</h2>
+      <p>Walk Mode is separate from Orbit / Explore and from the editor's free-fly camera. It is intended for moving through the building at a human-scale viewpoint.</p>
+      <div class="table-scroll"><table><thead><tr><th>Action</th><th>Desktop</th><th>Tablet / Mobile</th></tr></thead><tbody>
+        <tr><td>Walk</td><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> (arrow keys are also supported)</td><td>Use the Walk Mode joystick</td></tr>
+        <tr><td>Look around</td><td>Click the model to enable mouse-look; use mouse movement while pointer lock is active</td><td>Drag the dedicated look area</td></tr>
+        <tr><td>Move faster</td><td>Hold <kbd>Shift</kbd></td><td>Use the current Walk Mode movement behavior</td></tr>
+        <tr><td>Exit Walk Mode</td><td><kbd>Esc</kbd> or use the exit control</td><td>Tap <strong>Exit Walk</strong></td></tr>
+      </tbody></table></div>
+      <p class="help-note">Walk Mode includes its own floor, movement and collision behavior. It is not the same as moving the orbit camera.</p>
+    </section>
+
+    <section id="procedures" class="help-card">
+      <h2>4. Common procedures</h2>
+      <details open><summary>Open and inspect a model</summary><ol><li>Open the Main Viewer or Developer Studio.</li><li>Use <strong>Open GLB</strong> or <strong>Upload GLB</strong> and choose a supported <code>.glb</code> file.</li><li>Wait for loading to finish, then use Reset view if needed.</li><li>Use Orbit / Explore controls to inspect the exterior, or enter Walk Mode for first-person exploration.</li></ol></details>
+      <details><summary>Create or view a saved section</summary><ol><li>In Developer Studio, open Section Tool.</li><li>Choose a cut axis and visible side, then adjust the cut position.</li><li>Preview the section and save it with a descriptive name. Exposed cut surfaces are filled black for architectural section readability.</li><li>In the Main Viewer, use the Section selector to load a saved section or Clear section to remove both clipping and the black cut fill.</li></ol></details>
+      <details><summary>Use the 360° viewpoints</summary><ol><li>In Developer Studio, open 360° Viewpoint and place viewpoints on valid model surfaces.</li><li>Save the viewpoint data using the available controls.</li><li>In the Main Viewer, open 360° Views and select a viewpoint to enter the panorama.</li><li>Use the panorama viewer's on-screen back control to return to the model.</li></ol></details>
+      <details><summary>Change a material</summary><ol><li>Open Developer Studio and load a model.</li><li>Open Render and activate Pick Material.</li><li>Select a surface in the viewport.</li><li>Change supported material settings, then apply the override.</li><li>Use the existing reset option to remove the selected override if required.</li></ol></details>
+    </section>
+
+    <section id="troubleshooting" class="help-card">
+      <h2>5. Troubleshooting</h2>
+      <dl class="troubleshooting-list">
+        <dt>WASD does not move the camera</dt><dd>Click the 3D viewport first if required. Check that a text field, select menu or button is not focused. On touch devices, use the on-screen joystick instead.</dd>
+        <dt>Camera keeps moving after releasing input</dt><dd>Release the keys or joystick, click outside text inputs, and return focus to the viewer. The application clears held input when the window loses focus.</dd>
+        <dt>Cannot pick a material or place a viewpoint on touch</dt><dd>Turn off the editor's touch Navigation mode first, then activate the intended editing tool. Material picking must be explicitly activated with Pick Material.</dd>
+        <dt>A panorama point is rejected</dt><dd>Try a visible floor or other supported upward-facing surface. Some walls, steep faces, or surfaces hidden by section clipping are intentionally rejected.</dd>
+        <dt>The model is missing or fails to load</dt><dd>Use a local development server, check the browser console and confirm that the GLB file is valid. Do not open module-based pages directly as <code>file://</code>.</dd>
+      </dl>
+    </section>
+    <footer class="help-footer"><a href="./index.html">← Main Viewer</a><a href="./editor.html">Developer Studio →</a><span>TRIPT XR · Help &amp; controls</span></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRIPT XR — Section Scene Editor</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/editor.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body class="editor-page">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">T</div><div><div class="brand-name">TRIPT XR</div><div class="brand-subtitle">Developer tools · Section Scene Editor</div></div></div>
+    <div class="top-actions"><a class="editor-link" href="./index.html">← Back to viewer</a><a class="editor-link" href="./help.html">Help &amp; controls</a><button id="reset-view" type="button">Reset view</button><label class="file-button" for="model-file">Upload GLB</label><input id="model-file" type="file" accept=".glb,model/gltf-binary"></div>
+  </header>
+  <main class="editor-layout">
+    <section class="editor-view-shell">
+      <div id="viewer" class="viewer">
+        <div class="viewer-hint">Right-drag to look · WASD move · Q/E up/down · Shift faster · Touch: enable Navigation, then use joystick + look area</div>
+        <div id="loading" class="status-panel">No model uploaded. Use Upload GLB to begin.</div>
+        <div id="error" class="status-panel error hidden"></div>
+        <div id="walk-status" class="walk-status hidden" role="status" aria-live="polite"></div>
+        <div id="walk-controls" class="walk-controls" aria-label="Default free-fly controls">
+          <button id="editor-touch-nav-toggle" class="editor-touch-nav-toggle" type="button" aria-pressed="false">Enable touch navigation</button>
+          <button id="editor-touch-fast" class="editor-touch-fast" type="button" aria-pressed="false">FAST</button>
+          <div class="editor-touch-vertical" aria-label="Vertical camera and forward movement"><button type="button" data-fly-vertical="KeyE" aria-label="Move camera up">UP ▲</button><button type="button" data-fly-vertical="KeyQ" aria-label="Move camera down">DOWN ▼</button><button type="button" data-fly-zoom="1" aria-label="Move camera forward">ZOOM +</button><button type="button" data-fly-zoom="-1" aria-label="Move camera backward">ZOOM −</button></div>
+          <div id="walk-joystick" class="walk-joystick" aria-label="Movement joystick" role="application"><div id="walk-joystick-knob" class="walk-joystick-knob"></div></div>
+          <div id="walk-look-area" class="walk-look-area">Drag here to look</div>
+          <div class="walk-key-guide" aria-label="Free-fly keyboard controls"><span class="walk-key walk-key-w">W</span><span class="walk-key walk-key-a">A</span><span class="walk-key walk-key-s">S</span><span class="walk-key walk-key-d">D</span><small>WASD move · Mouse look · Q/E up/down · Shift faster · Esc releases mouse</small></div>
+        </div>
+      </div>
+      <footer class="viewer-footer"><span id="model-name">No model uploaded</span><span id="model-dimensions">Dimensions: waiting for model…</span><span id="model-size"></span></footer>
+    </section>
+    <aside class="editor-sidebar">
+      <div class="developer-studio-heading"><div><h1>TRIPT XR Developer Studio</h1><p>Configure sections, 360° viewpoints, and saved scenes.</p></div><div class="studio-heading-actions"><span class="dev-pill">DEVELOPER</span><button id="close-developer-panel" class="drawer-close-button" type="button" aria-label="Close developer panel" title="Close panel">×</button></div></div>
+      <nav class="tool-tabs" role="tablist" aria-label="Developer tools">
+        <button class="tool-tab active" id="tab-section" type="button" role="tab" aria-selected="true" aria-controls="panel-section" data-panel="panel-section">Section Tool</button>
+        <button class="tool-tab" id="tab-panorama" type="button" role="tab" aria-selected="false" aria-controls="panel-panorama" data-panel="panel-panorama">360° Viewpoint</button>
+        <button class="tool-tab" id="tab-scenes" type="button" role="tab" aria-selected="false" aria-controls="panel-scenes" data-panel="panel-scenes">Scene Manager</button>
+        <button class="tool-tab" id="tab-render" type="button" role="tab" aria-selected="false" aria-controls="panel-render" data-panel="panel-render">Render</button>
+      </nav>
+      <section class="editor-card tool-panel active" id="panel-section" role="tabpanel" aria-labelledby="tab-section">
+        <div class="section-heading"><div><h2>Section Tool</h2><p>Create and adjust horizontal or vertical section cuts.</p></div></div>
+        <label for="scene-name">Scene name</label><input id="scene-name" type="text" maxlength="80" placeholder="e.g. Ground Floor Section">
+        <div class="control-grid"><div><label for="section-axis">Cut axis</label><select id="section-axis"><option value="y">Horizontal (Y)</option><option value="x">Vertical (X)</option><option value="z">Vertical (Z)</option></select></div><div><label for="section-direction">Visible side</label><select id="section-direction"><option value="positive">Positive side</option><option value="negative">Negative side</option></select></div></div>
+        <div class="range-label"><label for="section-position">Cut position</label><output id="section-position-value">50%</output></div><input id="section-position" type="range" min="0" max="100" value="50">
+        <div class="button-row"><button id="apply-cut" class="primary-button" type="button">Preview section</button><button id="clear-cut" type="button">Clear cut</button></div>
+        <div class="button-row"><button id="save-scene" class="primary-button" type="button">Save scene</button><button id="update-scene" type="button" disabled>Update selected</button></div>
+        <p class="helper-text">This preview clips the model surface. Section caps / filled cut faces are not included in this first version.</p>
+      </section>
+      <section class="editor-card panorama-manager-card tool-panel" id="panel-panorama" role="tabpanel" aria-labelledby="tab-panorama" hidden>
+        <div class="list-title"><h2>Panorama Manager</h2><span class="dev-pill">DEVELOPER</span></div>
+        <p class="helper-text">Upload PNG or WebP 360° panoramas here. PNG files can be converted to WebP. Select a panorama, then click its viewpoint on the model to place a marker.</p>
+        <label for="panorama-files">Panorama images (PNG/WebP)</label><input id="panorama-files" type="file" accept=".png,.webp,image/png,image/webp" multiple>
+        <div class="button-row"><button id="panorama-upload" class="primary-button" type="button">Upload selected panoramas</button></div>
+        <div class="button-row"><button id="panorama-process" class="primary-button" type="button">Scan &amp; Convert PNG to WebP</button></div>
+        <label for="panorama-select">Panorama asset</label>
+        <select id="panorama-select"><option value="">Load panorama manifest…</option></select>
+        <div class="control-grid">
+          <div><label for="panorama-eye-height">Eye height (model units)</label><input id="panorama-eye-height" type="number" value="1.6" min="0.1" max="10" step="0.1"></div>
+          <div><label for="panorama-yaw">View yaw (°)</label><input id="panorama-yaw" type="number" value="0" min="-360" max="360" step="1"></div>
+          <div><label for="panorama-pitch">View pitch (°)</label><input id="panorama-pitch" type="number" value="0" min="-90" max="90" step="1"></div>
+        </div>
+        <div class="button-row"><button id="panorama-place-toggle" class="primary-button" type="button">Place viewpoint</button><button id="panorama-remove" type="button">Remove selected</button></div>
+        <div id="panorama-list" class="scene-list"><p class="empty-state">No panoramas loaded.</p></div>
+      </section>
+      <section class="editor-card scene-list-card tool-panel" id="panel-scenes" role="tabpanel" aria-labelledby="tab-scenes" hidden>
+        <div class="list-title"><h2>Saved section scenes</h2><span id="scene-count">0 scenes</span></div>
+        <div id="scene-list" class="scene-list"><p class="empty-state">No saved scenes yet. Configure a cut and select “Save scene”.</p></div>
+        <button id="reset-scenes" class="text-button" type="button">Clear all saved scenes</button>
+      </section>
+      <section class="editor-card render-settings-card tool-panel" id="panel-render" role="tabpanel" aria-labelledby="tab-render" hidden>
+        <div class="list-title"><h2>Render Settings</h2><span class="dev-pill">LIVE PREVIEW</span></div>
+        <p class="helper-text">Adjust the browser-based real-time appearance of the current model. Changes preview immediately in this editor. Use Save Project to store them for the main viewer.</p>
+        <div class="render-subsection">
+          <h3>Environment &amp; Lighting</h3>
+          <p class="helper-text">HDRIs are fetched online only when selected. They are not bundled with the project.</p>
+          <label for="render-hdri">Online HDRI environment</label>
+          <select id="render-hdri">
+            <option value="none">Default studio environment</option>
+            <option value="morning">Morning Meadow</option>
+            <option value="day">Open Daylight</option>
+            <option value="evening">Evening Sunset</option>
+          </select>
+          <div class="render-setting-row"><label for="render-hdri-rotation">Environment rotation</label><output id="render-hdri-rotation-value">0°</output></div>
+          <input id="render-hdri-rotation" type="range" min="0" max="360" value="0" step="5">
+          <label class="render-check-row" for="render-hdri-sky"><input id="render-hdri-sky" type="checkbox" checked> Show selected HDRI as visible sky</label>
+          <p class="helper-text">The online HDRI is shown only above the horizon. Below the horizon, a clean matte ground colour keeps the view scenic and uncluttered.</p>
+          <label for="render-background">Fallback viewport background</label>
+          <select id="render-background">
+            <option value="white">Architectural white</option>
+            <option value="studio">Soft studio grey</option>
+            <option value="dark">Dark presentation</option>
+          </select>
+          <div class="render-setting-row"><label for="render-exposure">Exposure</label><output id="render-exposure-value">1.00</output></div>
+          <input id="render-exposure" type="range" min="0.6" max="1.6" value="1" step="0.05">
+          <div class="render-setting-row"><label for="render-environment">Environment intensity</label><output id="render-environment-value">1.00</output></div>
+          <input id="render-environment" type="range" min="0" max="2" value="1" step="0.1">
+          <label class="render-check-row" for="render-shadows"><input id="render-shadows" type="checkbox" checked> Enable real-time shadows</label>
+          <label for="render-quality">Graphics quality</label>
+          <select id="render-quality">
+            <option value="performance">Performance</option>
+            <option value="balanced" selected>Balanced</option>
+            <option value="high">High quality</option>
+          </select>
+          <p id="render-hdri-status" class="helper-text" role="status" aria-live="polite">Using the default studio environment.</p>
+        </div>
+        <div class="render-subsection material-studio">
+          <h3>Material Studio</h3>
+          <p class="helper-text">Activate Pick Material, then click or tap a surface to sample its material. Changes are reversible overrides; the original GLB geometry is not modified.</p>
+          <button id="material-pick-toggle" type="button" aria-pressed="false">Pick Material</button>
+          <label for="material-select">Material</label>
+          <select id="material-select"><option value="">Load a model to list materials…</option></select>
+          <div class="material-selected-name" id="material-selected-name">No material selected</div>
+          <label for="material-color">Base colour</label>
+          <div class="material-color-row"><input id="material-color" type="color" value="#cccccc"><label class="render-check-row" for="material-preserve-color"><input id="material-preserve-color" type="checkbox" checked> Preserve original colour</label></div>
+          <div class="render-setting-row"><label for="material-roughness">Roughness</label><output id="material-roughness-value">50%</output></div>
+          <input id="material-roughness" type="range" min="0" max="100" value="50" step="1">
+          <div class="render-setting-row"><label for="material-metalness">Metalness</label><output id="material-metalness-value">0%</output></div>
+          <input id="material-metalness" type="range" min="0" max="100" value="0" step="1">
+          <div class="render-setting-row"><label for="material-opacity">Opacity</label><output id="material-opacity-value">100%</output></div>
+          <input id="material-opacity" type="range" min="5" max="100" value="100" step="1">
+          <label for="material-emissive-color">Emissive colour</label>
+          <input id="material-emissive-color" type="color" value="#000000">
+          <div class="render-setting-row"><label for="material-emissive-intensity">Emissive intensity</label><output id="material-emissive-intensity-value">0.00</output></div>
+          <input id="material-emissive-intensity" type="range" min="0" max="5" value="0" step="0.05">
+          <p class="helper-text">Emissive makes a material appear self-lit; it does not cast light onto nearby objects.</p>
+          <div class="button-row"><button id="material-apply" class="primary-button" type="button">Apply material</button><button id="material-reset" type="button">Reset selected</button></div>
+          <p id="material-status" class="helper-text" role="status" aria-live="polite">Select a surface or material from the list.</p>
+        </div>
+        <div class="button-row"><button id="render-reset" type="button">Reset render defaults</button><button id="render-apply" class="primary-button" type="button">Apply settings</button></div>
+        <p class="helper-text">These controls use real-time browser rendering, not path tracing. HDRI availability depends on the online asset host and browser network access.</p>
+      </section>
+      <section class="editor-card project-actions-card"><div class="list-title"><h2>Project Actions</h2><span class="dev-pill">DEVELOPER</span></div><p class="helper-text">Save section and panorama changes, export a complete editable ZIP, or start a clean project. Export does not clear the current workspace.</p><div class="project-action-buttons"><button id="save-project" class="primary-button" type="button"><span aria-hidden="true">▣</span> Save Project</button><button id="export-project" class="export-project-button" type="button"><span aria-hidden="true">⇩</span> Export Project</button><button id="new-project" class="new-project-button" type="button"><span aria-hidden="true">＋</span> New Project</button></div></section>
+      <div id="editor-status" class="editor-status" role="status" aria-live="polite">Editor ready. Load a model to begin.</div>
+    </aside>
+    <button id="open-developer-panel" class="open-developer-panel" type="button" aria-expanded="false" hidden><span aria-hidden="true">☰</span> Developer tools</button>
+  </main>
+  <script type="module" src="./js/editor.js"></script>
+</body>
+</html>

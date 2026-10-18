@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "model": "assets/model/building.glb",
+  "sections": [
+    {
+      "id": "section-1792339570501-1",
+      "name": "Y Section 2",
+      "enabled": true,
+      "axis": "y",
+      "position": 0.65,
+      "reverse": true
+    }
+  ]
+}

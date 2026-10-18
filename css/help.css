@@ -1,0 +1,33 @@
+.help-page { background:#f6f6f8; color:#24242b; }
+.help-topbar { border-bottom:1px solid #e6e6eb; }
+.help-main { width:min(1100px, 94%); margin:24px auto 50px; }
+.help-hero { padding:30px clamp(18px, 4vw, 42px); border:1px solid #e5e5eb; border-radius:16px; background:linear-gradient(135deg,#fff,#f4f4f7); box-shadow:0 8px 30px #11111108; }
+.help-eyebrow { margin:0 0 8px; color:#800f1b; font-size:11px; font-weight:850; letter-spacing:.14em; }
+.help-hero h1 { max-width:760px; margin:0; font-size:clamp(28px,4vw,42px); line-height:1.1; letter-spacing:-.035em; }
+.help-hero p:last-child { max-width:800px; margin:14px 0 0; color:#62626c; font-size:15px; line-height:1.65; }
+.help-jump { position:sticky; z-index:10; top:0; display:flex; flex-wrap:wrap; gap:8px; padding:12px 0; background:#f6f6f8ed; backdrop-filter:blur(10px); }
+.help-jump a,.help-footer a { display:inline-flex; align-items:center; min-height:38px; padding:8px 12px; border:1px solid #dedee5; border-radius:8px; background:#fff; color:#33333b; text-decoration:none; font-size:12px; font-weight:700; }
+.help-jump a:hover,.help-footer a:hover { border-color:#800f1b; }
+.help-card { margin:14px 0; padding:clamp(18px,3vw,28px); border:1px solid #e3e3e9; border-radius:14px; background:#fff; box-shadow:0 4px 18px #11111106; scroll-margin-top:80px; }
+.help-card h2 { margin:0 0 9px; font-size:23px; letter-spacing:-.02em; }
+.help-card h3 { margin:24px 0 8px; font-size:16px; }
+.help-card p { color:#62626c; font-size:13px; line-height:1.65; }
+.table-scroll { overflow-x:auto; margin:14px 0; }
+.help-card table { width:100%; border-collapse:collapse; min-width:600px; font-size:13px; }
+.help-card th,.help-card td { padding:12px 11px; border-bottom:1px solid #ececf0; text-align:left; vertical-align:top; line-height:1.5; }
+.help-card th { background:#f7f7f9; color:#3c3c45; font-size:11px; letter-spacing:.04em; text-transform:uppercase; }
+.help-card td:first-child { min-width:170px; font-weight:700; color:#33333b; }
+.help-card kbd { display:inline-block; min-width:24px; padding:3px 6px; border:1px solid #d7d7de; border-bottom-width:2px; border-radius:5px; background:#fafafd; color:#30303a; font:700 11px Consolas,monospace; text-align:center; }
+.help-note { padding:12px 14px; border-left:3px solid #800f1b; border-radius:0 8px 8px 0; background:#faf5f5; }
+.help-card ol { padding-left:22px; color:#52525c; font-size:13px; line-height:1.75; }
+.help-card details { padding:13px 0; border-bottom:1px solid #ececf0; }
+.help-card details:last-child { border-bottom:0; }
+.help-card summary { cursor:pointer; font-size:14px; font-weight:750; }
+.help-card details ol { margin-bottom:0; }
+.troubleshooting-list { display:grid; grid-template-columns:minmax(180px,.7fr) minmax(0,1.3fr); gap:0; margin:14px 0 0; font-size:13px; }
+.troubleshooting-list dt,.troubleshooting-list dd { margin:0; padding:12px 10px; border-bottom:1px solid #ececf0; line-height:1.55; }
+.troubleshooting-list dt { font-weight:750; }
+.troubleshooting-list dd { color:#62626c; }
+.help-footer { display:flex; flex-wrap:wrap; align-items:center; gap:9px; padding:18px 0; color:#85858f; font-size:11px; }
+.help-footer span { margin-left:auto; }
+@media(max-width:650px) { .help-main { width:94%; margin-top:12px; } .help-topbar { align-items:flex-start; flex-wrap:wrap; } .help-topbar .top-actions { flex-wrap:wrap; } .help-hero { padding:22px 18px; } .help-hero p:last-child { font-size:13px; } .help-jump { position:static; } .help-card { padding:17px 14px; } .troubleshooting-list { grid-template-columns:1fr; } .troubleshooting-list dt { padding-bottom:4px; border-bottom:0; } .troubleshooting-list dd { padding-top:4px; } .help-footer span { margin-left:0; width:100%; } }

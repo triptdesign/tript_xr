@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "background": "white",
+  "exposure": 1.0,
+  "environmentIntensity": 1.0,
+  "shadows": true,
+  "quality": "balanced",
+  "hdriPreset": "none",
+  "hdriRotation": 0.0,
+  "materialOverrides": [
+    {
+      "key": "F04_Emerald_Green",
+      "color": "#a3a3a3",
+      "preserveColor": false,
+      "roughness": 0.6,
+      "metalness": 0.0,
+      "opacity": 1.0
+    }
+  ]
+}

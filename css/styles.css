@@ -1,0 +1,179 @@
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #242424;
+  background: #fff;
+}
+html, body { width: 100%; min-height: 100%; margin: 0; }
+body { min-height: 100vh; background: #fff; }
+.topbar {
+  min-height: 76px; padding: 12px 2.7%; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px; background: #fff;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 12px; color: white; background: #242424; font-weight: 800; font-size: 23px;
+}
+.brand-name { font-size: 16px; letter-spacing: 3px; font-weight: 800; }
+.brand-subtitle { margin-top: 3px; color: #777; font-size: 12px; }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+button, .file-button {
+  border: 1px solid #d0d0d0; border-radius: 9px; background: #fff; color: #222;
+  padding: 10px 14px; font: inherit; font-size: 14px; cursor: pointer;
+}
+button:hover, .file-button:hover { background: #f5f5f5; }
+#model-file { display: none; }
+.page { padding: 0 2.7% 14px; }
+.viewer-shell { border: 1px solid #d8d8d8; border-radius: 9px; overflow: hidden; background: #fff; box-shadow: 0 5px 20px #00000008; }
+.viewer { width: 100%; height: min(78vh, 900px); min-height: 430px; position: relative; background: #fff; overflow: hidden; }
+.viewer canvas { width: 100%; height: 100%; display: block; outline: none; }
+.viewer-hint {
+  position: absolute; z-index: 2; left: 12px; top: 12px; pointer-events: none;
+  border: 1px solid #ddd; border-radius: 6px; padding: 8px 11px; background: #ffffffed;
+  color: #666; font-size: 12px;
+}
+.status-panel {
+  position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; background: #fffffff2;
+  color: #444; font-size: 13px; box-shadow: 0 4px 20px #0000000d; max-width: min(85%, 520px);
+}
+.error { color: #8b1d1d; border-color: #e8bcbc; white-space: pre-wrap; }
+.hidden { display: none; }
+.viewer-footer {
+  min-height: 36px; border-top: 1px solid #e1e1e1; padding: 9px 14px;
+  display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center;
+  color: #666; font-size: 12px;
+}
+#model-name { color: #315b8c; }
+#model-size { margin-left: auto; }
+.page-footer { padding: 17px 2px 0; display: flex; justify-content: space-between; gap: 10px; color: #888; font-size: 11px; }
+code { font-family: Consolas, monospace; }
+@media (max-width: 650px) {
+  .topbar { padding: 12px 4%; align-items: flex-start; }
+  .top-actions { gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  button, .file-button { padding: 9px 10px; font-size: 12px; }
+  .page { padding: 0 3% 12px; }
+  .viewer { height: 68vh; min-height: 360px; }
+  .viewer-hint { max-width: 85%; line-height: 1.5; }
+  .page-footer { flex-direction: column; }
+  #model-size { margin-left: 0; }
+}
+
+/* Saved section-scene controls in the main viewer toolbar. */
+.section-select-label {
+  color: #666;
+  font-size: 12px;
+  white-space: nowrap;
+}
+#section-scene-select {
+  max-width: 220px;
+  min-width: 160px;
+  border: 1px solid #d0d0d0;
+  border-radius: 9px;
+  background: #fff;
+  color: #222;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 13px;
+}
+.section-status {
+  color: #666;
+  font-size: 11px;
+  max-width: 180px;
+}
+@media (max-width: 850px) {
+  .topbar { flex-wrap: wrap; }
+  .top-actions { flex-wrap: wrap; }
+  #section-scene-select { max-width: 180px; min-width: 130px; }
+  .section-status { max-width: 100%; }
+}
+
+
+/* Walk Mode controls and touch overlays. */
+#walk-mode-toggle[aria-pressed="true"] { color: #fff; background: #242424; border-color: #242424; }
+.walk-status {
+  position: absolute; z-index: 5; left: 50%; top: 58px; transform: translateX(-50%);
+  max-width: min(92%, 560px); padding: 9px 12px; border: 1px solid #d6d6d6;
+  border-radius: 8px; background: #fffffff2; color: #333; font-size: 12px;
+  line-height: 1.45; text-align: center; pointer-events: none;
+}
+.walk-controls { position: absolute; z-index: 6; inset: 0; pointer-events: none; }
+.walk-joystick {
+  position: absolute; left: max(20px, env(safe-area-inset-left)); bottom: max(22px, env(safe-area-inset-bottom));
+  width: 124px; height: 124px; border: 2px solid #ffffffa8; border-radius: 50%;
+  background: #22222235; box-shadow: inset 0 0 0 1px #0000001c; pointer-events: auto; touch-action: none;
+}
+.walk-joystick-knob {
+  position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; transform: translate(-50%, -50%);
+  border: 1px solid #ffffffc9; border-radius: 50%; background: #ffffffa8; pointer-events: none;
+}
+.walk-look-area {
+  position: absolute; right: 0; top: 18%; bottom: 0; width: 48%; display: flex; align-items: center;
+  justify-content: center; color: #ffffffb0; font-size: 12px; text-shadow: 0 1px 3px #000;
+  pointer-events: auto; touch-action: none; user-select: none;
+}
+.walk-exit { position: absolute; right: 14px; top: 14px; pointer-events: auto; background: #fffffff0; }
+.walk-controls.hidden, .walk-status.hidden { display: none; }
+@media (pointer: fine) {
+  .walk-joystick, .walk-look-area { display: none; }
+}
+@media (max-width: 650px) {
+  .walk-status { top: 54px; font-size: 11px; }
+  .walk-joystick { width: 112px; height: 112px; }
+  .walk-joystick-knob { width: 44px; height: 44px; }
+}
+
+
+/* Context menu used to enter a selected floor space from Section View. */
+.section-space-menu {
+  position: absolute; z-index: 10; width: 180px; padding: 6px; display: flex; flex-direction: column; gap: 4px;
+  border: 1px solid #d4d4d4; border-radius: 10px; background: #fffffff5; box-shadow: 0 8px 28px #00000020;
+}
+.section-space-menu button { width: 100%; text-align: left; border: 0; border-radius: 6px; padding: 10px; font-size: 13px; }
+.section-space-menu button:first-child { background: #242424; color: #fff; }
+.section-space-menu button:first-child:hover { background: #444; }
+.section-space-menu.hidden { display: none; }
+
+
+/* Immersive panorama controls are scoped to the viewer so the surrounding application stays intact. */
+.panorama-overlay { position: absolute; z-index: 8; inset: 0; overflow: hidden; background: #111; color: #fff; pointer-events: auto; }
+.panorama-overlay.hidden { display: none; }
+.panorama-pannellum { position: absolute; inset: 0; width: 100%; height: 100%; background: #111; }
+.panorama-pannellum .pnlm-container { width: 100% !important; height: 100% !important; }
+.panorama-topbar { position: absolute; z-index: 20; inset: 12px 12px auto 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; pointer-events: none; }
+.panorama-title { padding: 9px 12px; border-radius: 8px; background: #111c; font-size: 13px; }
+.panorama-back { pointer-events: auto; color: #222; background: #fffffff0; border-color: #fff; }
+.panorama-hint { position: absolute; z-index: 15; bottom: 14px; left: 50%; transform: translateX(-50%); padding: 8px 12px; border-radius: 7px; background: #111b; color: #fff; font-size: 12px; white-space: nowrap; pointer-events: none; }
+.panorama-error { position: absolute; z-index: 25; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 80%; padding: 12px 16px; border-radius: 8px; background: #651d1d; color: #fff; font-size: 13px; text-align: center; }
+.panorama-error.hidden { display: none; }
+@media (max-width: 650px) { .panorama-hint { max-width: 90%; white-space: normal; text-align: center; } }
+
+
+/* Persistent panorama access for desktop, touchscreen laptops, tablets, and phones. */
+#panorama-views-toggle { white-space: nowrap; }
+.panorama-views-panel { position: absolute; z-index: 7; top: 14px; right: 14px; width: min(310px, calc(100% - 28px)); max-height: min(70%, 440px); overflow: hidden; border: 1px solid #d8d8d8; border-radius: 12px; background: #fffffff5; color: #242424; box-shadow: 0 8px 28px #00000025; }
+.panorama-views-panel.hidden { display: none; }
+.panorama-views-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-bottom: 1px solid #e5e5e5; }
+.panorama-views-heading button { padding: 4px 10px; font-size: 20px; line-height: 1.2; }
+.panorama-views-list { padding: 8px; max-height: 350px; overflow-y: auto; }
+.panorama-views-list p { margin: 8px; color: #666; font-size: 13px; }
+.panorama-view-item { display: block; width: 100%; margin: 4px 0; padding: 12px; text-align: left; border-radius: 8px; min-height: 44px; }
+.panorama-view-item:focus-visible, #panorama-views-toggle:focus-visible { outline: 3px solid #477fce; outline-offset: 2px; }
+@media (max-width: 650px) { .panorama-views-panel { top: 66px; right: 8px; width: min(300px, calc(100% - 16px)); max-height: 62%; } #panorama-views-toggle { padding: 10px 11px; } }
+
+
+/* Help link is available from both main viewer and Developer Studio. */
+.help-link { display:inline-flex; align-items:center; justify-content:center; color:#333; text-decoration:none; border:1px solid #d0d0d0; border-radius:9px; padding:10px 14px; font-size:13px; white-space:nowrap; background:#fff; }
+.help-link:hover { background:#f5f5f5; }
+
+/* Hybrid Orbit Mode joystick: the same ground-plane movement as desktop WASD. */
+.orbit-move-controls.hidden { display:none; }
+.orbit-move-controls { position:absolute; z-index:6; left:max(16px, env(safe-area-inset-left)); bottom:max(18px, env(safe-area-inset-bottom)); display:none; flex-direction:column; align-items:center; gap:8px; pointer-events:none; user-select:none; }
+.orbit-joystick { position:relative; width:124px; height:124px; border:2px solid #ffffffb8; border-radius:50%; background:#22222242; box-shadow:inset 0 0 0 1px #0000001c; pointer-events:auto; touch-action:none; -webkit-user-select:none; user-select:none; }
+.orbit-joystick-knob { position:absolute; left:50%; top:50%; width:48px; height:48px; transform:translate(-50%,-50%); border:1px solid #ffffffd9; border-radius:50%; background:#ffffffb8; pointer-events:none; }
+.orbit-move-controls #orbit-move-fast { min-width:68px; min-height:34px; padding:6px 12px; border-color:#ffffffb8; background:#22222266; color:#fff; font-size:11px; font-weight:800; letter-spacing:.5px; pointer-events:auto; touch-action:manipulation; }
+.orbit-move-controls #orbit-move-fast[aria-pressed="true"] { background:#242424e8; border-color:#fff; }
+@media (pointer:coarse) { .orbit-move-controls { display:flex; } }
+@media (max-width:650px) { .orbit-joystick { width:108px; height:108px; } .orbit-joystick-knob { width:42px; height:42px; } .orbit-move-controls { left:10px; bottom:12px; } .top-actions .help-link { padding:9px 10px; font-size:12px; } }

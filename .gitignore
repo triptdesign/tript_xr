@@ -1,0 +1,5 @@
+# Local model files can be large or proprietary.
+assets/*.glb
+assets/*.gltf
+assets/*.bin
+assets/textures/

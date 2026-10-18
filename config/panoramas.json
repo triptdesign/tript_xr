@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "panoramas": [
+    {
+      "id": "3_1scene 33",
+      "name": "3 1Scene 33",
+      "image": "./assets/panorama/3_1Scene 33.webp",
+      "enabled": true,
+      "position": {
+        "x": 5.7366,
+        "y": 1.6004,
+        "z": -20.8194
+      },
+      "orientation": {
+        "yaw": 0,
+        "pitch": 0
+      },
+      "floorPoint": {
+        "x": 5.7366,
+        "y": 0.0004,
+        "z": -20.8194
+      },
+      "eyeHeight": 1.6
+    },
+    {
+      "id": "3_1scene 34",
+      "name": "3 1Scene 34",
+      "image": "./assets/panorama/3_1Scene 34.webp",
+      "enabled": true,
+      "position": {
+        "x": 4.1703,
+        "y": 1.6004,
+        "z": -24.5885
+      },
+      "orientation": {
+        "yaw": 0,
+        "pitch": 0
+      },
+      "floorPoint": {
+        "x": 4.1703,
+        "y": 0.0004,
+        "z": -24.5885
+      },
+      "eyeHeight": 1.6
+    },
+    {
+      "id": "3_1scene 35",
+      "name": "3 1Scene 35",
+      "image": "./assets/panorama/3_1Scene 35.webp",
+      "enabled": true,
+      "position": {
+        "x": 7.4387,
+        "y": 1.6004,
+        "z": -27.3909
+      },
+      "orientation": {
+        "yaw": 0,
+        "pitch": 0
+      },
+      "floorPoint": {
+        "x": 7.4387,
+        "y": 0.0004,
+        "z": -27.3909
+      },
+      "eyeHeight": 1.6
+    },
+    {
+      "id": "3_1scene 36",
+      "name": "3 1Scene 36",
+      "image": "./assets/panorama/3_1Scene 36.webp",
+      "enabled": true,
+      "position": {
+        "x": 10.5446,
+        "y": 1.6004,
+        "z": -27.7197
+      },
+      "orientation": {
+        "yaw": 0,
+        "pitch": 0
+      },
+      "floorPoint": {
+        "x": 10.5446,
+        "y": 0.0004,
+        "z": -27.7197
+      },
+      "eyeHeight": 1.6
+    }
+  ]
+}

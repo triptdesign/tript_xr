@@ -1,0 +1,164 @@
+.editor-page { min-height: 100vh; }
+.editor-link { color: #f4f4f5; text-decoration: none; font-size: 13px; padding: 9px 10px; border: 1px solid #45454d; border-radius: 8px; white-space: nowrap; }
+.editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 16px; padding: 16px; max-width: 1800px; margin: 0 auto; }
+.editor-view-shell { min-width: 0; display: flex; flex-direction: column; }
+.editor-view-shell .viewer { min-height: 520px; height: calc(100vh - 150px); max-height: 1100px; }
+.editor-sidebar { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.editor-card { background: #fff; border: 1px solid #e2e2e7; border-radius: 12px; padding: 16px; box-shadow: 0 3px 14px #11111108; }
+.section-heading, .list-title, .range-label { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.section-heading h1 { font-size: 19px; margin: 0 0 5px; }
+.section-heading p { color: #686873; font-size: 12px; margin: 0 0 16px; line-height: 1.45; }
+.dev-pill { color: #5555a5; background: #eeeeff; border-radius: 5px; padding: 5px 7px; font-size: 9px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
+.editor-card label { display: block; font-size: 12px; font-weight: 650; margin: 12px 0 6px; color: #33333c; }
+.editor-card input[type="text"], .editor-card select { width: 100%; min-width: 0; border: 1px solid #d4d4dc; border-radius: 7px; background: #fff; padding: 10px; color: #22222a; font: inherit; font-size: 13px; }
+.control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.editor-card input[type="range"] { width: 100%; accent-color: #5555cf; }
+.range-label output { font-size: 12px; font-weight: 700; color: #5555cf; }
+.button-row { display: flex; gap: 8px; margin-top: 12px; }
+.button-row > button, .import-button { flex: 1; min-width: 0; justify-content: center; text-align: center; }
+.editor-card button, .import-button { border: 1px solid #d4d4dc; background: #fff; color: #25252d; border-radius: 7px; padding: 10px 9px; cursor: pointer; font: inherit; font-size: 12px; font-weight: 650; }
+.editor-card button:hover, .import-button:hover { background: #f4f4f8; }
+.editor-card .primary-button { color: white; background: #34348e; border-color: #34348e; }
+.editor-card .primary-button:hover { background: #25256f; }
+.editor-card button:disabled { opacity: .45; cursor: not-allowed; }
+.helper-text { color: #777782; font-size: 11px; line-height: 1.45; margin: 12px 0 0; }
+.list-title h2 { font-size: 14px; margin: 0; }
+.list-title span { color: #777782; font-size: 11px; }
+.scene-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; max-height: 260px; overflow-y: auto; }
+.empty-state { color: #858590; font-size: 12px; line-height: 1.5; margin: 4px 0; }
+.scene-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; border: 1px solid #e3e3e9; border-radius: 8px; padding: 9px; }
+.scene-item.selected { border-color: #5555cf; background: #f6f6ff; }
+.scene-select { border: 0 !important; padding: 0 !important; text-align: left; background: transparent !important; font-weight: 700 !important; font-size: 12px !important; overflow-wrap: anywhere; }
+.scene-meta { color: #777782; font-size: 10px; margin-top: 4px; }
+.scene-actions { display: flex; gap: 4px; }
+.scene-actions button { padding: 6px 7px; font-size: 10px; }
+.export-row { margin-top: 14px; }
+.import-button { display: inline-flex; align-items: center; }
+#json-file { display: none; }
+.text-button { display: block; margin: 12px auto 0; border: 0 !important; color: #8a3c3c !important; background: transparent !important; font-size: 11px !important; }
+.editor-status { padding: 10px 12px; background: #f2f2f6; border-radius: 8px; font-size: 11px; line-height: 1.45; color: #555560; }
+@media (max-width: 1000px) { .editor-layout { grid-template-columns: minmax(0, 1fr); } .editor-view-shell .viewer { height: 58vh; min-height: 380px; } .editor-sidebar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } .editor-status { grid-column: 1 / -1; } }
+@media (max-width: 650px) { .editor-layout { padding: 8px; gap: 9px; } .editor-sidebar { display: flex; } .editor-view-shell .viewer { height: 52vh; min-height: 300px; } .editor-card { padding: 12px; } .topbar { flex-wrap: wrap; gap: 10px; } .top-actions { flex-wrap: wrap; } .editor-link { font-size: 11px; } }
+
+
+/* Panorama Manager controls and viewpoint placement feedback. */
+.panorama-manager-card input[type="number"], .panorama-manager-card select { width: 100%; min-width: 0; border: 1px solid #d4d4dc; border-radius: 7px; background: #fff; padding: 10px; color: #22222a; font: inherit; font-size: 13px; }
+.panorama-manager-card .scene-list { max-height: 210px; }
+.panorama-manager-card .scene-item { grid-template-columns: minmax(0, 1fr) auto; }
+.panorama-manager-card .scene-meta { overflow-wrap: anywhere; line-height: 1.4; }
+
+/* TRIPT brand accent for Developer Option controls. */
+.primary-button { background: #800F1B; border-color: #800F1B; }
+.primary-button:hover { background: #650B15; border-color: #650B15; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #800F1B; outline-offset: 2px; }
+
+
+/* Developer Studio tabs keep the three editing tools focused and mutually exclusive. */
+.developer-studio-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:4px 2px 0; }
+.developer-studio-heading h1 { margin:0 0 4px; font-size:19px; }
+.developer-studio-heading p { margin:0; color:#686873; font-size:12px; line-height:1.45; }
+.tool-tabs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; padding:5px; border:1px solid #e2e2e7; border-radius:10px; background:#f5f5f7; }
+.tool-tab { border:1px solid transparent; border-radius:7px; padding:10px 5px; background:transparent; color:#44444e; font:inherit; font-size:11px; font-weight:750; cursor:pointer; }
+.tool-tab.active { color:#fff; background:#800F1B; border-color:#800F1B; box-shadow:0 2px 5px #800f1b22; }
+.tool-panel[hidden] { display:none !important; }
+.project-action-buttons { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+.project-action-buttons button { display:flex; align-items:center; justify-content:center; gap:7px; min-height:42px; font-weight:750; }
+.project-action-buttons .primary-button { color:#fff; background:#800F1B; border-color:#800F1B; }
+.project-action-buttons .export-project-button { color:#FFF8F0; background:#292929; border-color:#292929; }
+.project-action-buttons .export-project-button:hover { background:#111; }
+@media (max-width:650px) { .tool-tab { font-size:10px; padding:9px 3px; } .project-action-buttons { grid-template-columns:1fr; } }
+
+
+/* Developer Studio tabs keep the three editing tools focused and mutually exclusive. */
+.developer-studio-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:4px 2px 0; }
+.developer-studio-heading h1 { margin:0 0 4px; font-size:19px; }
+.developer-studio-heading p { margin:0; color:#686873; font-size:12px; line-height:1.45; }
+.tool-tabs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; padding:5px; border:1px solid #e2e2e7; border-radius:10px; background:#f5f5f7; }
+.tool-tab { border:1px solid transparent; border-radius:7px; padding:10px 5px; background:transparent; color:#44444e; font:inherit; font-size:11px; font-weight:750; cursor:pointer; }
+.tool-tab.active { color:#fff; background:#800F1B; border-color:#800F1B; box-shadow:0 2px 5px #800f1b22; }
+.tool-panel[hidden] { display:none !important; }
+.project-action-buttons { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+.project-action-buttons button { display:flex; align-items:center; justify-content:center; gap:7px; min-height:42px; font-weight:750; }
+.project-action-buttons .primary-button { color:#fff; background:#800F1B; border-color:#800F1B; }
+.project-action-buttons .export-project-button { color:#FFF8F0; background:#292929; border-color:#292929; }
+.project-action-buttons .export-project-button:hover { background:#111; }
+@media (max-width:650px) { .tool-tab { font-size:10px; padding:9px 3px; } .project-action-buttons { grid-template-columns:1fr; } }
+
+/* New Project is intentionally visually distinct because it clears the active workspace. */
+.project-action-buttons .new-project-button { grid-column: 1 / -1; color: #8a2020; background: #fff7f7; border-color: #e8b8b8; }
+.project-action-buttons .new-project-button:hover { background: #ffeded; }
+
+
+/* Render panel: compact live controls that match the existing Developer Studio cards. */
+.tool-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.render-settings-card select { width: 100%; min-width: 0; border: 1px solid #d4d4dc; border-radius: 7px; background: #fff; padding: 10px; color: #22222a; font: inherit; font-size: 13px; }
+.render-setting-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+.render-setting-row label { margin: 0; }
+.render-setting-row output { color: #800F1B; font-size: 12px; font-weight: 750; font-variant-numeric: tabular-nums; }
+.render-settings-card input[type="range"] { width: 100%; accent-color: #800F1B; }
+.render-check-row { display: flex !important; align-items: center; gap: 9px; padding: 10px 0 2px; }
+.render-check-row input { width: 16px; height: 16px; accent-color: #800F1B; }
+@media (max-width: 650px) { .tool-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+
+/* Groups environment and material controls without changing the existing Developer Studio layout. */
+.render-subsection { display: grid; gap: 10px; padding: 14px 0; border-bottom: 1px solid #e8e8ed; }
+.render-subsection h3 { margin: 0; color: #25252d; font-size: 14px; }
+.render-subsection .helper-text { margin: 0; }
+.render-settings-card input[type="color"] { width: 42px; min-width: 42px; height: 36px; padding: 3px; border: 1px solid #d4d4dc; border-radius: 7px; background: #fff; }
+.material-color-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.material-color-row .render-check-row { padding: 0; }
+.material-selected-name { overflow-wrap: anywhere; padding: 9px 10px; border-radius: 7px; background: #f7f7f9; color: #555560; font-size: 12px; }
+.render-settings-card select:disabled, .render-settings-card input:disabled, .render-settings-card button:disabled { opacity: .55; cursor: not-allowed; }
+
+
+/* Slide-over Developer Studio drawer: the model viewport remains full-width underneath it. */
+.editor-layout { display:block; width:100%; max-width:none; padding:10px 16px 16px; margin:0; position:relative; }
+.editor-view-shell { width:100%; min-width:0; }
+.editor-view-shell .viewer { width:100%; height:calc(100vh - 142px); min-height:420px; max-height:none; }
+.editor-sidebar { position:fixed; z-index:50; top:76px; right:12px; bottom:12px; width:min(370px, calc(100vw - 24px)); max-height:calc(100vh - 88px); overflow-y:auto; overscroll-behavior:contain; display:flex; flex-direction:column; gap:12px; padding:14px; background:rgba(248,248,250,.97); border:1px solid #dedee5; border-radius:14px; box-shadow:0 16px 48px #17171f30; backdrop-filter:blur(16px); transform:translateX(0); opacity:1; transition:transform .24s ease, opacity .24s ease; }
+.editor-sidebar::-webkit-scrollbar { width:8px; }
+.editor-sidebar::-webkit-scrollbar-thumb { background:#c9c9d2; border-radius:8px; border:2px solid transparent; background-clip:padding-box; }
+.developer-panel-closed .editor-sidebar { transform:translateX(calc(100% + 24px)); opacity:0; pointer-events:none; }
+.studio-heading-actions { display:flex; align-items:center; gap:8px; }
+.drawer-close-button { width:30px; height:30px; flex:0 0 30px; display:grid; place-items:center; padding:0 !important; font-size:22px !important; line-height:1; border-radius:8px !important; background:#fff !important; }
+.open-developer-panel { position:fixed; z-index:49; top:86px; right:16px; display:flex; align-items:center; gap:8px; padding:11px 14px; border:1px solid #800F1B; border-radius:10px; background:#800F1B; color:#fff; box-shadow:0 6px 20px #17171f25; font:inherit; font-size:12px; font-weight:750; cursor:pointer; }
+.open-developer-panel[hidden] { display:none !important; }
+.render-settings-card .render-check-row { margin-top:4px; }
+@media (max-width:650px) {
+  .editor-layout { padding:8px; }
+  .editor-view-shell .viewer { height:calc(100vh - 118px); min-height:320px; }
+  .editor-sidebar { top:64px; right:8px; bottom:8px; width:min(370px, calc(100vw - 16px)); max-height:calc(100vh - 72px); padding:11px; }
+  .open-developer-panel { top:72px; right:12px; }
+}
+@media (prefers-reduced-motion:reduce) { .editor-sidebar { transition:none; } }
+
+
+/* Compact WASD guidance for Walk Mode in the Developer Studio viewport. */
+.walk-key-guide { position:absolute; z-index:7; left:50%; bottom:18px; transform:translateX(-50%); display:grid; grid-template-columns:repeat(3,34px); grid-template-rows:repeat(2,32px) auto; gap:4px; justify-items:center; align-items:center; padding:10px 12px; border:1px solid #ffffff70; border-radius:12px; background:#202329c9; color:#fff; box-shadow:0 8px 26px #0003; pointer-events:none; }
+.walk-key { width:32px; height:30px; display:grid; place-items:center; border:1px solid #ffffff8c; border-bottom-width:3px; border-radius:6px; background:#ffffff18; font-size:12px; font-weight:800; }
+.walk-key-w { grid-column:2; grid-row:1; }
+.walk-key-a { grid-column:1; grid-row:2; }
+.walk-key-s { grid-column:2; grid-row:2; }
+.walk-key-d { grid-column:3; grid-row:2; }
+.walk-key-guide small { grid-column:1 / 4; grid-row:3; margin-top:5px; font-size:10px; white-space:nowrap; color:#f0f0f0; }
+@media (pointer:fine) { .walk-key-guide { bottom:16px; } }
+@media (max-width:650px) { .walk-key-guide { left:50%; bottom:12px; transform:translateX(-50%) scale(.9); transform-origin:bottom center; } }
+
+
+/* Touch navigation is opt-in in the editor so viewport taps remain available for material and panorama editing. */
+.editor-touch-nav-toggle { display:none; position:absolute; z-index:9; top:12px; right:12px; pointer-events:auto; padding:10px 12px; border:1px solid #ffffffb8; border-radius:9px; background:#242424e8; color:#fff; font-size:12px; font-weight:750; touch-action:manipulation; }
+.editor-touch-nav-toggle[aria-pressed="true"] { background:#800F1B; border-color:#fff; }
+@media (pointer:coarse) { .editor-touch-nav-toggle { display:block; } .editor-page .walk-controls { pointer-events:none; } .editor-page .walk-joystick, .editor-page .walk-look-area { display:none; } .editor-page .viewer.touch-navigation-active .walk-joystick { display:block; } .editor-page .viewer.touch-navigation-active .walk-look-area { display:flex; } .editor-page .walk-key-guide { display:none; } }
+@media (pointer:fine) { .editor-touch-nav-toggle { display:none; } }
+.editor-page .walk-look-area { right:0; top:16%; bottom:0; width:48%; }
+.editor-page .viewer.touch-navigation-active .walk-look-area { background:linear-gradient(90deg, transparent, #2222220c); }
+
+.editor-touch-fast { display:none; position:absolute; z-index:9; top:60px; right:12px; pointer-events:auto; padding:8px 12px; border:1px solid #ffffffb8; border-radius:8px; background:#222222d9; color:#fff; font-size:11px; font-weight:850; touch-action:manipulation; }
+.editor-touch-fast[aria-pressed="true"] { background:#800F1B; border-color:#fff; }
+@media (pointer:coarse) { .editor-page .viewer.touch-navigation-active .editor-touch-fast { display:block; } }
+#material-pick-toggle[aria-pressed="true"] { color:#fff; background:#800F1B; border-color:#800F1B; }
+
+.editor-touch-vertical { display:none; position:absolute; z-index:9; right:12px; bottom:16px; flex-direction:column; gap:7px; pointer-events:auto; }
+.editor-touch-vertical button { min-width:72px; padding:10px 8px; border:1px solid #ffffffb8; border-radius:8px; background:#222222d9; color:#fff; font-size:10px; font-weight:800; touch-action:none; }
+@media (pointer:coarse) { .editor-page .viewer.touch-navigation-active .editor-touch-vertical { display:flex; } }

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRIPT XR — Architectural Model Viewer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">T</div>
+      <div>
+        <div class="brand-name">TRIPT XR</div>
+        <div class="brand-subtitle">Architectural model viewer</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <a class="help-link" href="./help.html">Help &amp; controls</a>
+      <button id="reset-view" type="button">Reset view</button>
+      <button id="walk-mode-toggle" type="button" aria-pressed="false">Walk Mode</button>
+      <button id="panorama-views-toggle" type="button" aria-expanded="false" aria-controls="panorama-views-panel">360° Views</button>
+      <label for="section-scene-select" class="section-select-label">Section</label>
+      <select id="section-scene-select" aria-label="Saved section scene">
+        <option value="">Loading sections…</option>
+      </select>
+      <button id="clear-section" type="button">Clear section</button>
+      <span id="section-status" class="section-status" role="status" aria-live="polite">Loading saved sections…</span>
+      <span id="panorama-status" class="section-status" role="status" aria-live="polite">Loading panoramas…</span>
+      <label class="file-button" for="model-file">Open GLB</label>
+      <input id="model-file" type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json">
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="viewer-shell" aria-label="3D model viewer">
+      <div id="viewer" class="viewer">
+        <div class="viewer-hint">WASD / joystick to move · Drag to orbit · Scroll / pinch to zoom · Right-drag / two-finger drag to pan</div>
+        <div id="loading" class="status-panel">No model uploaded. Open Developer Studio to upload a GLB.</div>
+        <div id="error" class="status-panel error hidden"></div>
+        <div id="walk-status" class="walk-status hidden" role="status" aria-live="polite"></div>
+        <div id="panorama-views-panel" class="panorama-views-panel hidden" aria-label="Available 360 degree viewpoints">
+          <div class="panorama-views-heading"><strong>360° Views</strong><button id="panorama-views-close" type="button" aria-label="Close viewpoint list">×</button></div>
+          <div id="panorama-views-list" class="panorama-views-list"><p>No panorama viewpoints available.</p></div>
+        </div>
+        <div id="section-space-menu" class="section-space-menu hidden" role="menu" aria-label="Section space actions">
+          <button id="enter-section-space" type="button" role="menuitem">Enter this space</button>
+          <button id="cancel-section-space" type="button" role="menuitem">Cancel</button>
+        </div>
+        <div id="orbit-move-controls" class="orbit-move-controls" aria-label="Orbit movement touch controls">
+          <div id="orbit-joystick" class="orbit-joystick" role="application" aria-label="Move camera joystick" tabindex="0">
+            <div id="orbit-joystick-knob" class="orbit-joystick-knob"></div>
+          </div>
+          <button type="button" id="orbit-move-fast" aria-pressed="false" aria-label="Toggle fast camera movement">FAST</button>
+        </div>
+        <div id="walk-controls" class="walk-controls hidden" aria-label="Walk Mode touch controls">
+          <div id="walk-joystick" class="walk-joystick" aria-label="Movement joystick" role="application">
+            <div id="walk-joystick-knob" class="walk-joystick-knob"></div>
+          </div>
+          <div id="walk-look-area" class="walk-look-area">Drag here to look</div>
+          <button id="walk-exit" class="walk-exit" type="button">Exit Walk</button>
+        </div>
+      </div>
+      <footer class="viewer-footer">
+        <span id="model-name">No model uploaded</span>
+        <span id="model-dimensions">Dimensions: waiting for model…</span>
+        <span id="model-size"></span>
+      </footer>
+    </section>
+    <div class="page-footer">
+      <span>TRIPT XR · Local preview</span>
+      <span>Upload a GLB through <code>editor.html</code></span>
+    </div>
+  </main>
+
+  <script type="module" src="./js/viewer.js"></script>
+</body>
+</html>
